@@ -1,4 +1,4 @@
-const mongoose = require(mongoose);
+const mongoose = require('mongoose');
 // Definir nuestros modelos
 const Schema = mongoose.Schema
 
