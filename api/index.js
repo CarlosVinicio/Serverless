@@ -6,6 +6,7 @@ const cors = require('cors');
 // Routes
 const meals = require('./routes/meals')
 const orders = require('./routes/orders')
+const auth = require('./routes/auth');
 
 // crear app de express
 const app = express();
@@ -24,6 +25,6 @@ mongoose.connect("mongodb+srv://Carlos:88DwaybVQYLN2JV@cluster0.wwgsz.mongodb.ne
 //Rutas
 app.use('/api/meals', meals );
 app.use('/api/orders', orders );
-
+app.use('/api/auth', auth);
 
 module.exports = app;

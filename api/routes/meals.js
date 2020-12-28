@@ -7,10 +7,10 @@ router.get('/', (req, resp) => {
     //Query
     Meals.find()
     .exec().then((x) => {
-        resp.status(200).send(x)
+    resp.status(200).send(x)
     });
 });
- 
+
 router.get('/:id', (req, resp) => {
     //Query
     Meals.findById(req.params.id)
