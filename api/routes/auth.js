@@ -28,10 +28,9 @@ router.post('/register', (req, resp) => {
 					email, 
 					password: encrypetdPassword,
 					salt: newSalt
+				}).then(() => {
+					resp.send('Usuario creado con éxito');
 				})
-			})
-			.then(() => {
-				resp.send('Usuario creado con éxito');
 			})
 		})
 	})
