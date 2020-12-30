@@ -13,29 +13,28 @@ const signToken = (_id) => {
 	});
 }
 
-router.post('/register', (req, resp) => {
-	//Query
-	const { email, password } = req.body;
-	crypto.randomBytes(16, (err, salt) => {
-		const newSalt =  salt.toString('base64');
-			crypto.pbkdf2(password, newSalt, 100, 64, 'sha1', (err, key) => {
-			const encrypetdPassword = key.toString('base64');
-			Users.findOne({email}).exec()
-			.then((user) => {
-				if(user) {
-					return resp.send('Usuario ya existe');
-				}
-				Users.create({
-					email, 
-					password: encrypetdPassword,
-					salt: newSalt
-				}).then(() => {
-					resp.send('Usuario creado con éxito')
-				})
-			})
-		})
-	})
-});
+router.post('/register', (req, res) => {
+  const { email, password } = req.body
+  crypto.randomBytes(16, (err, salt) => {
+    const newSalt = salt.toString('base64')
+    crypto.pbkdf2(password, newSalt, 10000, 64, 'sha1', (err,key) => {
+      const encryptedPassword = key.toString('base64')
+      Users.findOne({ email }).exec()
+        .then(user => {
+          if (user) {
+            return res.send('usuario ya existe')
+          }
+          Users.create({
+            email,
+            password: encryptedPassword,
+            salt: newSalt,
+          }).then(() => {
+            res.send('usuario creado con exito')
+          })
+        })
+    })
+  })
+})
 
 router.post('/login', (req, resp) => {
 	const { email, password } = req.body;
