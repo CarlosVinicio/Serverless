@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const Users = require('../models/Users');
 const { isAuthenticated } = require('../auth');
+const { resource } = require('..');
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.post('/register', (req, resp) => {
 					password: encrypetdPassword,
 					salt: newSalt
 				}).then(() => {
-					resp.status(200).send('Usuario creado con éxito');
+					resp.status(200).send({success: 'Usuario creado con éxito'})
 				})
 			})
 		})
