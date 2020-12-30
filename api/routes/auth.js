@@ -41,7 +41,7 @@ router.post('/login', (req, resp) => {
 	Users.findOne({email}).exec()
 	.then(user => {
 		if (!user) {
-			return resp.send('Usuario o contraseña incorrecta')
+			return resp.send('Usuario no existe')
 		}
 		crypto.pbkdf2(password, user.salt , 100, 64, 'sha1', (err, key) => {
 			const encrypetdPassword = key.toString('base64');
